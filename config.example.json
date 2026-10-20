@@ -1,0 +1,8 @@
+{
+  "url": "https://dev-null.sh",
+  "poll_interval": "30s",
+  "auto_load_new": false,
+  "refresh_on_switch": true,
+  "mouse": true,
+  "allow_insecure_http": false
+}

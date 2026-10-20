@@ -1,0 +1,21 @@
+run:
+  timeout: 3m
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - staticcheck
+    - gosec
+    - revive
+    - misspell
+    - govet
+
+linters-settings:
+  revive:
+    rules:
+      - name: exported
+        disabled: false
+  gosec:
+    excludes:
+      - G204

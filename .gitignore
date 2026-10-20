@@ -1,0 +1,11 @@
+/devnull
+/devnull.exe
+/dist/
+*.out
+coverage.out
+coverage.html
+.env
+.env.*
+*.pem
+.DS_Store
+.idea/
