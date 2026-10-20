@@ -12,14 +12,14 @@ Built by **[Raza Jahangir](https://razajahangir.dev)** · [GitHub](https://githu
 
 This is an **unofficial community client**. It is not affiliated with or endorsed by [dev-null.sh](https://dev-null.sh).
 
-![devnull-tui latest feed — Go Bubble Tea client for the /dev/null developer social network](docs/feed.jpg)
+![devnull-tui latest feed — Go Bubble Tea client for the /dev/null developer social network](docs/feed.png)
 
 <p>
-<img src="docs/profile.jpg" alt="devnull-tui profile screen with commit activity heatmap, streak, XP level, and achievement badges" width="49%" />
-<img src="docs/notifications.jpg" alt="devnull-tui notifications: stars, replies, follows, and level-up events in the terminal" width="49%" />
+<img src="docs/profile.png" alt="devnull-tui profile screen with commit activity heatmap, streak, XP level, and achievement badges" width="49%" />
+<img src="docs/notifications.png" alt="devnull-tui notifications: stars, replies, follows, and level-up events in the terminal" width="49%" />
 </p>
 
-![devnull-tui compose screen — write and send a commit from the terminal](docs/compose.jpg)
+![devnull-tui compose screen — write and send a commit from the terminal](docs/compose.png)
 
 ## Table of contents
 
