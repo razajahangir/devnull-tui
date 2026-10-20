@@ -31,7 +31,7 @@ jobs:
           go-version: "1.24.x"
       - name: gofmt
         run: test -z "$(gofmt -l .)"
-      - uses: golangci/golangci-lint-action@v6
+      - uses: golangci/golangci-lint-action@v9
         with:
           version: v1.64
 
