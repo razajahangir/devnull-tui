@@ -18,9 +18,18 @@ func InstanceID(rawURL string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	id := u.Host
-	id = strings.ReplaceAll(id, "/", "_")
-	id = strings.ReplaceAll(id, string(os.PathSeparator), "_")
+	id := strings.Map(func(r rune) rune {
+		switch r {
+		case '/', '\\', ':', '<', '>', '"', '|', '?', '*':
+			return '_'
+		default:
+			if r < 32 {
+				return -1
+			}
+			return r
+		}
+	}, u.Host)
+	id = strings.Trim(id, " .")
 	if id == "" || id == "." || id == ".." {
 		return "", fmt.Errorf("invalid instance host")
 	}
@@ -157,7 +166,7 @@ func writeFileAtomic(path string, data []byte, perm fs.FileMode) error {
 	if err := tmp.Close(); err != nil {
 		return err
 	}
-	if err := os.Rename(tmpName, path); err != nil {
+	if err := replaceFile(tmpName, path); err != nil {
 		return err
 	}
 	ok = true
@@ -165,4 +174,16 @@ func writeFileAtomic(path string, data []byte, perm fs.FileMode) error {
 		return os.Chmod(path, perm)
 	}
 	return nil
+}
+
+// replaceFile moves tmpName onto path. Windows cannot rename over an existing file.
+func replaceFile(tmpName, path string) error {
+	err := os.Rename(tmpName, path)
+	if err == nil || runtime.GOOS != "windows" {
+		return err
+	}
+	if rmErr := os.Remove(path); rmErr != nil && !os.IsNotExist(rmErr) {
+		return err
+	}
+	return os.Rename(tmpName, path)
 }

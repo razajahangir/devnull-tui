@@ -8,6 +8,17 @@ import (
 	"testing"
 )
 
+func TestInstanceIDIsFilesystemSafe(t *testing.T) {
+	got, err := InstanceID("http://127.0.0.1:8000")
+	if err != nil || got != "127.0.0.1_8000" {
+		t.Fatalf("loopback got %q err %v", got, err)
+	}
+	got, err = InstanceID("https://dev-null.sh")
+	if err != nil || got != "dev-null.sh" {
+		t.Fatalf("production got %q err %v", got, err)
+	}
+}
+
 func TestSaveAndLoadKey(t *testing.T) {
 	dir := t.TempDir()
 	t.Setenv("XDG_CONFIG_HOME", dir)

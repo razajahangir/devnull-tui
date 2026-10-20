@@ -131,7 +131,15 @@ func writeAtomic(path string, data []byte, perm os.FileMode) error {
 		return err
 	}
 	if err := os.Rename(name, path); err != nil {
-		return err
+		if runtime.GOOS != "windows" {
+			return err
+		}
+		if rmErr := os.Remove(path); rmErr != nil && !os.IsNotExist(rmErr) {
+			return err
+		}
+		if err = os.Rename(name, path); err != nil {
+			return err
+		}
 	}
 	ok = true
 	if runtime.GOOS != "windows" {
